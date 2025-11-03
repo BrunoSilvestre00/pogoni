@@ -15,8 +15,13 @@ const JUMP_VELOCITY = -900.0
 @onready var collision_hitbox_left: CollisionShape2D = $SideAttackHitbox/CollisionHitboxLeft
 @onready var collision_hitbox_right: CollisionShape2D = $SideAttackHitbox/CollisionHitboxRight
 
+@onready var light_left: PointLight2D = $SideAttackHitbox/CollisionHitboxLeft/LightLeft
+@onready var light_right: PointLight2D = $SideAttackHitbox/CollisionHitboxRight/LightRight
+
+
 var is_attacking: bool = false
 var facing_right: bool = false
+
 
 func flip() -> void:
 	movement_sprites.flip_h = facing_right
@@ -33,12 +38,17 @@ func flip() -> void:
 	collision_hitbox_left.disabled = collision_hitbox_left.disabled || facing_right
 	collision_hitbox_right.disabled = collision_hitbox_right.disabled || not facing_right
 	
+	light_left.enabled = light_left.enabled and not facing_right
+	light_right.enabled = light_right.enabled and facing_right
+	
 func _setup_attack(do: bool) -> void:
 	is_attacking = do
 	attack_sprites.visible = do
 	movement_sprites.visible = not do
 	collision_hitbox_left.disabled = not do
 	collision_hitbox_right.disabled = not do
+	light_left.enabled = do
+	light_right.enabled = do
 	
 func make_attack() -> void:
 	_setup_attack(true)
@@ -61,6 +71,7 @@ func resolve_animation(direction: float, attack: bool) -> void:
 func _physics_process(delta: float) -> void:
 	var jump_key = Input.is_action_just_pressed("jump")
 	var atack_key = Input.is_action_just_pressed("attack")
+	var spatack_key = Input.is_action_just_pressed("spattack")
 	var direction := Input.get_axis("move_left", "move_right")
 	
 	if not is_on_floor():
@@ -75,7 +86,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	if not is_attacking:
-		resolve_animation(direction, atack_key)
+		resolve_animation(direction, spatack_key)
 		
 	flip()
 	move_and_slide()

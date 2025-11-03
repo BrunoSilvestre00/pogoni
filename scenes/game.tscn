@@ -61,16 +61,20 @@ tile_set = SubResource("TileSet_lbhrr")
 [node name="Torchs" type="Node" parent="."]
 
 [node name="Torch" parent="Torchs" instance=ExtResource("3_lnu2h")]
-position = Vector2(-384, -192)
+position = Vector2(-384, -96)
 
 [node name="Torch2" parent="Torchs" instance=ExtResource("3_lnu2h")]
-position = Vector2(-192, -192)
+position = Vector2(-192, -160)
 
 [node name="Torch3" parent="Torchs" instance=ExtResource("3_lnu2h")]
-position = Vector2(384, -192)
+position = Vector2(384, -96)
 
 [node name="Torch4" parent="Torchs" instance=ExtResource("3_lnu2h")]
-position = Vector2(192, -192)
+position = Vector2(192, -160)
 
 [node name="Torch5" parent="Torchs" instance=ExtResource("3_lnu2h")]
-position = Vector2(0, -192)
+position = Vector2(0, -224)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+energy = 0.5
+blend_mode = 1

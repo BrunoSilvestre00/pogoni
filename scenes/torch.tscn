@@ -1,82 +1,78 @@
-[gd_scene load_steps=22 format=3 uid="uid://bp4roxd5acmg2"]
+[gd_scene load_steps=23 format=3 uid="uid://bp4roxd5acmg2"]
 
-[ext_resource type="Texture2D" uid="uid://bmp7g7qn1uu5n" path="res://assets/sprites/torch.png" id="1_d4v33"]
+[ext_resource type="Texture2D" uid="uid://c2cx0byny1lg0" path="res://assets/sprites/torch.png" id="1_d4v33"]
 [ext_resource type="Script" uid="uid://dvsu8hnhon8g3" path="res://scripts/torch.gd" id="1_o2tjn"]
-[ext_resource type="Texture2D" uid="uid://dcam45wv3anxd" path="res://assets/sprites/blue-torch.png" id="2_my26j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4v33"]
 size = Vector2(18.73912, 82.481415)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wjrvc"]
-atlas = ExtResource("2_my26j")
-region = Rect2(0, 0, 37, 100)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2bkw1"]
-atlas = ExtResource("2_my26j")
-region = Rect2(37, 0, 37, 100)
+atlas = ExtResource("1_d4v33")
+region = Rect2(0, 100, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_etrdt"]
-atlas = ExtResource("2_my26j")
-region = Rect2(74, 0, 37, 100)
+atlas = ExtResource("1_d4v33")
+region = Rect2(37, 100, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x1r1x"]
-atlas = ExtResource("2_my26j")
-region = Rect2(111, 0, 37, 100)
+atlas = ExtResource("1_d4v33")
+region = Rect2(74, 100, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1df0"]
-atlas = ExtResource("2_my26j")
-region = Rect2(148, 0, 37, 100)
+atlas = ExtResource("1_d4v33")
+region = Rect2(111, 100, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e6wph"]
-atlas = ExtResource("2_my26j")
-region = Rect2(185, 0, 37, 100)
+atlas = ExtResource("1_d4v33")
+region = Rect2(148, 100, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_if6sk"]
-atlas = ExtResource("2_my26j")
-region = Rect2(222, 0, 37, 100)
+atlas = ExtResource("1_d4v33")
+region = Rect2(185, 100, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xugk2"]
-atlas = ExtResource("2_my26j")
-region = Rect2(259, 0, 37, 100)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d4v33"]
 atlas = ExtResource("1_d4v33")
-region = Rect2(0, 0, 37, 100)
+region = Rect2(222, 100, 37, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cq4k"]
+atlas = ExtResource("1_d4v33")
+region = Rect2(259, 100, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_my26j"]
 atlas = ExtResource("1_d4v33")
-region = Rect2(37, 0, 37, 100)
+region = Rect2(0, 0, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o2tjn"]
 atlas = ExtResource("1_d4v33")
-region = Rect2(74, 0, 37, 100)
+region = Rect2(37, 0, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r3k50"]
 atlas = ExtResource("1_d4v33")
-region = Rect2(111, 0, 37, 100)
+region = Rect2(74, 0, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ndh0a"]
 atlas = ExtResource("1_d4v33")
-region = Rect2(148, 0, 37, 100)
+region = Rect2(111, 0, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ktql7"]
 atlas = ExtResource("1_d4v33")
-region = Rect2(185, 0, 37, 100)
+region = Rect2(148, 0, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gybtl"]
 atlas = ExtResource("1_d4v33")
-region = Rect2(222, 0, 37, 100)
+region = Rect2(185, 0, 37, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_21l5o"]
+atlas = ExtResource("1_d4v33")
+region = Rect2(222, 0, 37, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjrvc"]
 atlas = ExtResource("1_d4v33")
 region = Rect2(259, 0, 37, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2bkw1"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wjrvc")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2bkw1")
 }, {
@@ -97,15 +93,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xugk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cq4k")
 }],
 "loop": true,
 "name": &"activated",
 "speed": 10.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d4v33")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_my26j")
 }, {
@@ -126,11 +122,23 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_21l5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjrvc")
 }],
 "loop": true,
 "name": &"deactivated",
 "speed": 10.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_o2tjn"]
+offsets = PackedFloat32Array(0, 0.7133333)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r3k50"]
+gradient = SubResource("Gradient_o2tjn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Torch" type="Area2D"]
 collision_layer = 4
@@ -143,8 +151,15 @@ shape = SubResource("RectangleShape2D_d4v33")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2bkw1")
-animation = &"activated"
+animation = &"deactivated"
 autoplay = "deactivated"
+
+[node name="Light" type="PointLight2D" parent="."]
+position = Vector2(1, -19)
+color = Color(0.99215686, 0.5058824, 0.003921569, 1)
+energy = 1.25
+texture = SubResource("GradientTexture2D_r3k50")
+texture_scale = 5.0
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
