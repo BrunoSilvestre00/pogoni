@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://d38y872mxps7r"]
+[gd_scene load_steps=34 format=3 uid="uid://d38y872mxps7r"]
 
 [ext_resource type="Texture2D" uid="uid://27mgohl3g1dl" path="res://assets/sprites/player.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c0w872ckwae16" path="res://scripts/player.gd" id="1_g2els"]
@@ -144,33 +144,17 @@ animations = [{
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
 atlas = ExtResource("6_tuyoq")
-region = Rect2(0, 0, 200, 130)
+region = Rect2(800, 0, 200, 130)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
 atlas = ExtResource("6_tuyoq")
-region = Rect2(200, 0, 200, 130)
+region = Rect2(1000, 0, 200, 130)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
 atlas = ExtResource("6_tuyoq")
-region = Rect2(400, 0, 200, 130)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
-atlas = ExtResource("6_tuyoq")
-region = Rect2(600, 0, 200, 130)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l71n6"]
-atlas = ExtResource("6_tuyoq")
-region = Rect2(800, 0, 200, 130)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ke2ow"]
-atlas = ExtResource("6_tuyoq")
-region = Rect2(1000, 0, 200, 130)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ujl30"]
-atlas = ExtResource("6_tuyoq")
 region = Rect2(1200, 0, 200, 130)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_31cv2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
 atlas = ExtResource("6_tuyoq")
 region = Rect2(1400, 0, 200, 130)
 
@@ -188,22 +172,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ni07")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l71n6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ke2ow")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ujl30")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_31cv2")
 }],
 "loop": false,
 "name": &"side_attack",
-"speed": 24.0
+"speed": 16.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
@@ -236,8 +208,6 @@ animation = &"idle"
 visible = false
 sprite_frames = SubResource("SpriteFrames_qlg0r")
 animation = &"side_attack"
-frame = 7
-frame_progress = 1.0
 offset = Vector2(44, -4)
 
 [node name="CollisionHeadLeft" type="CollisionShape2D" parent="."]
