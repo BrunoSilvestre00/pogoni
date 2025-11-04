@@ -5,91 +5,53 @@ const SPEED = 500.0
 const JUMP_VELOCITY = -900.0
 
 @onready var movement_sprites: AnimatedSprite2D = $MovementSprites
-@onready var attack_sprites: AnimatedSprite2D = $AttackSprites
+@onready var collision_body: CollisionShape2D = $CollisionBody
+@onready var collision_side_attack: CollisionShape2D = $CollisionSideAttack
 
-@onready var collision_head_l: CollisionShape2D = $CollisionHeadLeft
-@onready var collision_head_r: CollisionShape2D = $CollisionHeadRight
-@onready var collision_body_l: CollisionShape2D = $CollisionBodyLeft
-@onready var collision_body_r: CollisionShape2D = $CollisionBodyRight
-
-@onready var collision_hitbox_left: CollisionShape2D = $SideAttackHitbox/CollisionHitboxLeft
-@onready var collision_hitbox_right: CollisionShape2D = $SideAttackHitbox/CollisionHitboxRight
-
-@onready var light_left: PointLight2D = $SideAttackHitbox/CollisionHitboxLeft/LightLeft
-@onready var light_right: PointLight2D = $SideAttackHitbox/CollisionHitboxRight/LightRight
-
-
-var is_attacking: bool = false
 var facing_right: bool = false
-
+var is_attacking: bool = false
 
 func flip() -> void:
 	movement_sprites.flip_h = facing_right
-	attack_sprites.flip_h = facing_right
+	if facing_right == (collision_side_attack.position.x < 0):
+		collision_side_attack.position.x *= -1
 	
-	attack_sprites.offset = Vector2(-17+64, -4) if facing_right else Vector2(44-64, -4)
-	
-	collision_head_r.disabled = not facing_right
-	collision_body_r.disabled = not facing_right
-	
-	collision_head_l.disabled = facing_right
-	collision_body_l.disabled = facing_right
-	
-	collision_hitbox_left.disabled = collision_hitbox_left.disabled || facing_right
-	collision_hitbox_right.disabled = collision_hitbox_right.disabled || not facing_right
-	
-	light_left.enabled = light_left.enabled and not facing_right
-	light_right.enabled = light_right.enabled and facing_right
-	
-func _setup_attack(do: bool) -> void:
-	is_attacking = do
-	attack_sprites.visible = do
-	movement_sprites.visible = not do
-	collision_hitbox_left.disabled = not do
-	collision_hitbox_right.disabled = not do
-	light_left.enabled = do
-	light_right.enabled = do
-	
-func make_attack() -> void:
-	_setup_attack(true)
-	
-func stop_attack() -> void:
-	_setup_attack(false)
+func resolve_attack():
+	collision_side_attack.disabled = not is_attacking
 
-func resolve_animation(direction: float, attack: bool) -> void:
-	facing_right = direction > 0 || (movement_sprites.flip_h && direction == 0)
-	
-	if attack:
-		make_attack()
-		return attack_sprites.play("side_attack")
-	
+func resolve_animation(direction: float) -> void:
+	if is_attacking:
+		return movement_sprites.play("side-attack")
 	if not is_on_floor():
 		return movement_sprites.play("fall" if velocity.y > 0 else "fly")
-	
-	return movement_sprites.play("idle" if direction == 0 else "run")
+	return movement_sprites.play("idle" if not direction else "walk")
 
 func _physics_process(delta: float) -> void:
-	var jump_key = Input.is_action_just_pressed("jump")
-	var atack_key = Input.is_action_just_pressed("attack")
-	var spatack_key = Input.is_action_just_pressed("spattack")
+	var jump_key := Input.is_action_just_pressed("jump")
+	var atack_key := Input.is_action_just_pressed("attack")
 	var direction := Input.get_axis("move_left", "move_right")
+	
+	facing_right = direction > 0 || (movement_sprites.flip_h && direction == 0)
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	if jump_key and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		
+	if atack_key:
+		is_attacking = true
 	
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if not is_attacking:
-		resolve_animation(direction, spatack_key)
-		
+	resolve_attack()
+	resolve_animation(direction)	
 	flip()
 	move_and_slide()
 
-func _on_attack_sprites_animation_finished() -> void:
-	stop_attack()
+
+func _on_movement_sprites_animation_finished() -> void:
+	is_attacking = false

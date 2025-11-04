@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dvsu8hnhon8g3" path="res://scripts/torch.gd" id="1_o2tjn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4v33"]
-size = Vector2(18.73912, 82.481415)
+size = Vector2(18.73912, 57.33915)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2bkw1"]
 atlas = ExtResource("1_d4v33")
@@ -145,8 +145,8 @@ collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_o2tjn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.63043976, -0.09844208)
+[node name="FireCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0.63043976, -12.669575)
 shape = SubResource("RectangleShape2D_d4v33")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="."]
