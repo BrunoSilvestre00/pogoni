@@ -1,11 +1,28 @@
-[gd_scene load_steps=33 format=3 uid="uid://d38y872mxps7r"]
+[gd_scene load_steps=42 format=3 uid="uid://d38y872mxps7r"]
 
 [ext_resource type="Script" uid="uid://c0w872ckwae16" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://m0ybwjivwhq1" path="res://assets/sprites/fall.png" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://scfh110un71q" path="res://assets/sprites/down-attack.png" id="2_fjrip"]
 [ext_resource type="Texture2D" uid="uid://dynpm2u0sy8lr" path="res://assets/sprites/fly.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dn1lvhd5mpii6" path="res://assets/sprites/idle.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://wlm2nalxcp3o" path="res://assets/sprites/walk.png" id="6_fjrip"]
 [ext_resource type="Texture2D" uid="uid://byq8pctn0lmfv" path="res://assets/sprites/side-attack.png" id="6_tuyoq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
+atlas = ExtResource("2_fjrip")
+region = Rect2(0, 0, 199, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
+atlas = ExtResource("2_fjrip")
+region = Rect2(199, 0, 199, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
+atlas = ExtResource("2_fjrip")
+region = Rect2(398, 0, 199, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
+atlas = ExtResource("2_fjrip")
+region = Rect2(597, 0, 199, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
 atlas = ExtResource("2_dqkch")
@@ -103,6 +120,23 @@ region = Rect2(1176, 0, 196, 103)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qfm1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fulsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60mlk")
+}],
+"loop": false,
+"name": &"down-attack",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
 }, {
 "duration": 1.0,
@@ -198,29 +232,71 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
 radius = 24.0
-height = 92.0
+height = 104.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tuyoq"]
 radius = 34.0
+
+[sub_resource type="Gradient" id="Gradient_fjrip"]
+offsets = PackedFloat32Array(0, 0.6933333)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_smehm"]
+gradient = SubResource("Gradient_fjrip")
+width = 192
+height = 192
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_smehm"]
+offsets = PackedFloat32Array(0, 0.06, 0.68)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0.046666667, 0.046666667, 0.046666667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ur7pv"]
+gradient = SubResource("Gradient_smehm")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"side-attack"
-frame = 3
-frame_progress = 1.0
+animation = &"walk"
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_qlg0r")
 
-[node name="CollisionSideAttack" type="CollisionShape2D" parent="."]
-light_mask = 4
-visibility_layer = 4
+[node name="SideAttackHitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionAttack" type="CollisionShape2D" parent="SideAttackHitbox"]
 position = Vector2(-58, 9)
 shape = SubResource("CircleShape2D_tuyoq")
 debug_color = Color(0.60804147, 0.36404154, 1, 0.41960785)
 
+[node name="LightAttack" type="PointLight2D" parent="SideAttackHitbox"]
+position = Vector2(-58.000004, 8.999999)
+scale = Vector2(1.0625001, 1.0625)
+color = Color(0.5882353, 0.101960786, 0.78431374, 1)
+energy = 1.5
+texture = SubResource("GradientTexture2D_smehm")
+
+[node name="DownAttackHitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionAttack" type="CollisionPolygon2D" parent="DownAttackHitbox"]
+polygon = PackedVector2Array(-72, 24, -40, 64, 0, 72, 40, 64, 72, 24)
+
+[node name="LightAttack" type="PointLight2D" parent="DownAttackHitbox"]
+position = Vector2(0, 36)
+color = Color(0.5882353, 0.101960786, 0.78431374, 1)
+energy = 2.5
+texture = SubResource("GradientTexture2D_ur7pv")
+
 [connection signal="animation_finished" from="MovementSprites" to="." method="_on_movement_sprites_animation_finished"]
+[connection signal="area_entered" from="DownAttackHitbox" to="." method="_on_down_attack_hitbox_area_entered"]

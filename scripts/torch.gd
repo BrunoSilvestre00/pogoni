@@ -10,5 +10,6 @@ func activate_torch() -> void:
 	light.energy = 0.75
 	fire_collision.disabled = true
 
-func _on_area_entered(_area: Area2D) -> void:
-	activate_torch()
+func _on_area_entered(area: Area2D) -> void:
+	if area.name in ['DownAttackHitbox', 'SideAttackHitbox']:
+		call_deferred("activate_torch")

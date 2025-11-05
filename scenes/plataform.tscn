@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl0elf18avtm6"]
+
+[ext_resource type="Texture2D" uid="uid://wfbuercdjwa0" path="res://assets/sprites/tower.png" id="1_s5nw7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um5iv"]
+atlas = ExtResource("1_s5nw7")
+region = Rect2(0, 128, 192, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8h2yb"]
+size = Vector2(192, 17)
+
+[node name="Plataform" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_um5iv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_8h2yb")
+one_way_collision = true

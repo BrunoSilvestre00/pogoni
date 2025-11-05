@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=4 uid="uid://dj6dj56a42pia"]
+[gd_scene load_steps=10 format=4 uid="uid://dj6dj56a42pia"]
 
 [ext_resource type="Script" uid="uid://ca8uyb08voi86" path="res://scripts/game_manager.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://d38y872mxps7r" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://wfbuercdjwa0" path="res://assets/sprites/tower.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bp4roxd5acmg2" path="res://scenes/torch.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bl0elf18avtm6" path="res://scenes/plataform.tscn" id="5_iywne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("2_yqjtg")
@@ -40,7 +41,7 @@ script = ExtResource("1_lbhrr")
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 z_index = 1
-position = Vector2(1, -472)
+position = Vector2(-1, -59)
 collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -83,3 +84,8 @@ position = Vector2(0, -224)
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 energy = 0.5
 blend_mode = 1
+
+[node name="Plataforms" type="Node" parent="."]
+
+[node name="Plataform" parent="Plataforms" instance=ExtResource("5_iywne")]
+position = Vector2(0, -296)
