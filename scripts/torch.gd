@@ -11,7 +11,7 @@ extends Area2D
 func activate_torch() -> void:
 	sprites.play("activated")
 	light.color = Color("#961AC8")
-	light.energy = 0.75
+	light.energy = 1
 	fire_collision.disabled = true
 	game_manager.score.increase_score()
 	

@@ -83,6 +83,10 @@ position = Vector2(192, -160)
 position = Vector2(0, -224)
 start_torch = true
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Tower"]
+energy = 0.5
+blend_mode = 1
+
 [node name="Plataforms" type="Node" parent="."]
 
 [node name="Plataform" parent="Plataforms" instance=ExtResource("5_iywne")]
@@ -98,6 +102,4 @@ shape = SubResource("WorldBoundaryShape2D_p57ef")
 
 [node name="Timer" type="Timer" parent="Plataforms/Killzone"]
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-energy = 0.5
-blend_mode = 1
+[connection signal="ready" from="Tower" to="Tower" method="_on_ready"]
