@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d38y872mxps7r"]
+[gd_scene load_steps=52 format=3 uid="uid://d38y872mxps7r"]
 
 [ext_resource type="Script" uid="uid://c0w872ckwae16" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://m0ybwjivwhq1" path="res://assets/sprites/fall.png" id="2_dqkch"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dynpm2u0sy8lr" path="res://assets/sprites/fly.png" id="3_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dn1lvhd5mpii6" path="res://assets/sprites/idle.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://wlm2nalxcp3o" path="res://assets/sprites/walk.png" id="6_fjrip"]
+[ext_resource type="Texture2D" uid="uid://43nds7cm18ve" path="res://assets/sprites/look-down.png" id="6_smehm"]
 [ext_resource type="Texture2D" uid="uid://byq8pctn0lmfv" path="res://assets/sprites/side-attack.png" id="6_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://ciapxwax28kji" path="res://assets/sprites/look-up.png" id="7_ur7pv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
 atlas = ExtResource("2_fjrip")
@@ -71,6 +73,38 @@ region = Rect2(392, 0, 196, 104)
 [sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
 atlas = ExtResource("4_fjrip")
 region = Rect2(588, 0, 196, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4ail"]
+atlas = ExtResource("6_smehm")
+region = Rect2(0, 0, 196, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a38lo"]
+atlas = ExtResource("6_smehm")
+region = Rect2(196, 0, 196, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ni07"]
+atlas = ExtResource("6_smehm")
+region = Rect2(392, 0, 196, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj30b"]
+atlas = ExtResource("6_smehm")
+region = Rect2(588, 0, 196, 102)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc3p3"]
+atlas = ExtResource("7_ur7pv")
+region = Rect2(0, 0, 196, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hax0n"]
+atlas = ExtResource("7_ur7pv")
+region = Rect2(196, 0, 196, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4otl"]
+atlas = ExtResource("7_ur7pv")
+region = Rect2(392, 0, 196, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
+atlas = ExtResource("7_ur7pv")
+region = Rect2(588, 0, 196, 110)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
 atlas = ExtResource("6_tuyoq")
@@ -188,6 +222,40 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_i4ail")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a38lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ni07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj30b")
+}],
+"loop": true,
+"name": &"look-down",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jc3p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hax0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4otl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2b1d")
+}],
+"loop": true,
+"name": &"look-up",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_jej6c")
 }, {
 "duration": 1.0,
@@ -264,7 +332,9 @@ script = ExtResource("1_g2els")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"walk"
+animation = &"look-up"
+frame = 3
+frame_progress = 0.28959003
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qlg0r")
@@ -297,6 +367,12 @@ position = Vector2(0, 36)
 color = Color(0.5882353, 0.101960786, 0.78431374, 1)
 energy = 2.5
 texture = SubResource("GradientTexture2D_ur7pv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -700
+limit_top = -9999939
+limit_right = 700
+limit_bottom = 150
 
 [connection signal="animation_finished" from="MovementSprites" to="." method="_on_movement_sprites_animation_finished"]
 [connection signal="area_entered" from="DownAttackHitbox" to="." method="_on_down_attack_hitbox_area_entered"]
