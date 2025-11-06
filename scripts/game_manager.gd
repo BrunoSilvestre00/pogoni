@@ -6,15 +6,15 @@ class Score:
 	func get_score() -> int:
 		return self.count
 		
-	func is_initial_completed() -> bool:
-		return self.count >= 4
-		
 	func reset_score() -> void:
 		self.count = 0
-	
-	func increase_score() -> void:
-		self.count += 1
+		
+	func increase_score(amount: int = 1) -> void:
+		self.count += amount
 		if not self.count % 10:
 			self.count += 10
 
-var score: Score = Score.new()
+var _score: Score = Score.new()
+
+func score() -> Score:
+	return _score

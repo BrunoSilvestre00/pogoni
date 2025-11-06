@@ -332,9 +332,7 @@ script = ExtResource("1_g2els")
 
 [node name="MovementSprites" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"look-up"
-frame = 3
-frame_progress = 0.28959003
+animation = &"idle"
 
 [node name="CollisionBody" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_qlg0r")
@@ -369,10 +367,11 @@ energy = 2.5
 texture = SubResource("GradientTexture2D_ur7pv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 1)
 limit_left = -700
 limit_top = -9999939
 limit_right = 700
-limit_bottom = 150
+limit_bottom = 300
 
 [connection signal="animation_finished" from="MovementSprites" to="." method="_on_movement_sprites_animation_finished"]
 [connection signal="area_entered" from="DownAttackHitbox" to="." method="_on_down_attack_hitbox_area_entered"]

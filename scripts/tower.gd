@@ -2,7 +2,6 @@ extends Node
 
 const SCORE_TRIGGER: int = 5
 
-@onready var game_manager: Node = %GameManager
 @onready var bg: TileMapLayer = $BG
 @onready var structure: TileMapLayer = $Structure
 @onready var details: TileMapLayer = $Details
@@ -25,7 +24,7 @@ func resolve_color(key: int) -> void:
 		tween.tween_property(tile, "modulate", TILEMAP_COLOR_FILTERS[key], 0.5)
 
 func _process(_delta):
-	var score: int = game_manager.score.get_score()
+	var score: int = GameManager.score().get_score()
 	
 	@warning_ignore("integer_division")
 	resolve_color(int(score / SCORE_TRIGGER) % COLORS_SIZE)
